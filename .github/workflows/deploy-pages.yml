@@ -1,0 +1,75 @@
+name: Deploy NOVA to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: github-pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      VITE_SUPABASE_URL: https://znevzirirtvrlxebuyyp.supabase.co
+      VITE_SUPABASE_PUBLISHABLE_KEY: sb_publishable_6S6pwokxrnPeK6cuYTdpRQ_pbVCbsRt
+      VITE_TOSS_CLIENT_KEY: test_gck_docs_Ovk5rk1EwkEbP0W43n07xlzm
+      GITHUB_PAGES_BASE_PATH: /nova-tech-store
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10.27.0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.19.0
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build NOVA
+        run: pnpm build
+
+      - name: Start production renderer
+        run: |
+          pnpm start -- --port 4173 > /tmp/nova-pages-server.log 2>&1 &
+          for attempt in {1..30}; do
+            curl --fail --silent http://127.0.0.1:4173/ > /dev/null && exit 0
+            sleep 1
+          done
+          cat /tmp/nova-pages-server.log
+          exit 1
+
+      - name: Export static Pages site
+        env:
+          PAGES_EXPORT_ORIGIN: http://127.0.0.1:4173
+        run: pnpm export:pages
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: pages-dist
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

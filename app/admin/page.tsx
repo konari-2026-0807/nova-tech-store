@@ -58,6 +58,7 @@ const paymentLabels: Record<string, string> = {
   test_card: "테스트 카드",
   kakao_pay: "카카오페이 데모",
   naver_pay: "네이버페이 데모",
+  toss_test: "토스페이먼츠 테스트",
 };
 
 const currency = (value: number) => `${value.toLocaleString("ko-KR")}원`;

@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { MapPin, Search } from "lucide-react";
+import { KakaoAddressMap } from "./KakaoAddressMap";
 
 type DaumPostcodeData = {
   zonecode: string;
@@ -119,6 +120,7 @@ export function AddressFields({
       <label className="full"><span>상세 주소</span><input ref={address2Ref} value={address2} onChange={(event) => onAddress2Change(event.target.value)} autoComplete="address-line2" placeholder="동·호수 등" disabled={disabled} maxLength={300} /></label>
       {postcodeError && <p className="checkout-postcode-error full" role="alert">{postcodeError}</p>}
       <p className="checkout-postcode-note full">다음 우편번호 서비스로 안전하게 주소를 검색합니다.</p>
+      <KakaoAddressMap address={address1} />
     </>
   );
 }
