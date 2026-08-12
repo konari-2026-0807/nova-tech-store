@@ -110,6 +110,10 @@ Never add `GROQ_API_KEY` to a `VITE_` variable, GitHub Pages workflow, or client
 bundle. The public browser only calls Supabase; Groq credentials remain in the
 Edge Function environment.
 
+For compatibility with the first production setup, the Edge Function also
+accepts the existing `shopping` secret name. Prefer `GROQ_API_KEY` for new
+environments because its purpose is explicit.
+
 ## Learn More
 
 - [vinext Documentation](https://github.com/cloudflare/vinext)

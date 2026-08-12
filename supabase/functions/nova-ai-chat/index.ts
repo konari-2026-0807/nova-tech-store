@@ -109,7 +109,10 @@ Deno.serve(async (request) => {
   if (request.method === "OPTIONS") return new Response("ok", { headers: corsHeaders(origin) });
   if (request.method !== "POST") return json(origin, { error: "method_not_allowed" }, 405);
 
-  const groqApiKey = Deno.env.get("GROQ_API_KEY")?.trim();
+  // `shopping` is retained as a backwards-compatible alias for the secret
+  // originally created in the Supabase Dashboard. New environments should
+  // use the explicit `GROQ_API_KEY` name.
+  const groqApiKey = (Deno.env.get("GROQ_API_KEY") ?? Deno.env.get("shopping"))?.trim();
   if (!groqApiKey) return json(origin, { error: "ai_not_configured" }, 503);
 
   const contentLength = Number(request.headers.get("content-length") ?? 0);
