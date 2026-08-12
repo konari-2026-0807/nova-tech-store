@@ -94,6 +94,22 @@ actions tied to the current ChatGPT user. Leave public content anonymous.
 - `npm test`: build the starter and verify its rendered loading skeleton
 - `npm run db:generate`: generate Drizzle migrations after schema changes
 
+## NOVA AI Concierge
+
+The storefront includes a global Korean shopping assistant backed by the
+`nova-ai-chat` Supabase Edge Function and Groq Chat Completions.
+
+1. In Supabase Dashboard, open **Edge Functions > Secrets**.
+2. Add `GROQ_API_KEY` with the key issued by Groq.
+3. Optionally add `GROQ_MODEL` (the default is `openai/gpt-oss-20b`).
+4. Deploy `supabase/functions/nova-ai-chat/index.ts` with JWT verification
+   disabled. The function performs its own origin, payload, and request-rate
+   checks because the concierge is available to anonymous shoppers.
+
+Never add `GROQ_API_KEY` to a `VITE_` variable, GitHub Pages workflow, or client
+bundle. The public browser only calls Supabase; Groq credentials remain in the
+Edge Function environment.
+
 ## Learn More
 
 - [vinext Documentation](https://github.com/cloudflare/vinext)

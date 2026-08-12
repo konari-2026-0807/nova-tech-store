@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { CartProvider } from "./components/CartProvider";
+import { AiConcierge } from "./components/AiConcierge";
 
 export const metadata: Metadata = {
   metadataBase: new URL("http://localhost:3000"),
@@ -30,7 +31,12 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="ko">
-      <body><CartProvider>{children}</CartProvider></body>
+      <body>
+        <CartProvider>
+          {children}
+          <AiConcierge />
+        </CartProvider>
+      </body>
     </html>
   );
 }
