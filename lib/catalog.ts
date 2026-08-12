@@ -15,7 +15,7 @@ export type CatalogProduct = {
   priceNumber: number;
   color: string;
   colors: string[];
-  art: "headset" | "notebook" | "keyboard" | "hub";
+  art: "headset" | "notebook" | "keyboard" | "hub" | "accessory";
   image: string;
   badge: string;
   rating: number;
@@ -92,6 +92,45 @@ export const products: CatalogProduct[] = [
       { id: "a1", author: "김민*", date: "2026.08.07", rating: 5, title: "출퇴근 시간이 정말 조용해졌어요", comment: "지하철에서 저음 소음이 거의 느껴지지 않고 음악 볼륨을 낮춰도 디테일이 잘 들립니다. 장시간 착용해도 정수리 압박이 적어서 만족해요.", option: "Midnight · Standard", helpful: 34, photo: true },
       { id: "a2", author: "박서*", date: "2026.08.03", rating: 5, title: "공간 음향이 과하지 않고 자연스럽습니다", comment: "영화 볼 때 대사가 또렷하고 배경음이 넓게 펼쳐져요. 앱 설정도 단순해서 처음 연결할 때 어렵지 않았습니다.", option: "Midnight · Standard", helpful: 21 },
       { id: "a3", author: "이준*", date: "2026.07.29", rating: 4, title: "마감과 배터리는 기대 이상", comment: "금속 부분의 촉감과 힌지 움직임이 단단합니다. 케이스가 조금 큰 편이지만 배터리가 오래가서 출장 때 충전기를 거의 꺼내지 않았어요.", option: "Cloud Silver · Travel Edition", helpful: 12 },
+    ],
+  },
+  {
+    slug: "nova-cable-dot",
+    name: "NOVA Cable Dot",
+    category: "DESK ACCESSORY",
+    categorySlugs: ["new", "computing", "accessories"],
+    price: "1,000원",
+    priceNumber: 1000,
+    color: "Graphite",
+    colors: ["Graphite", "Soft White"],
+    art: "accessory",
+    image: "/images/products/nova-cable-dot.webp",
+    badge: "1K DROP",
+    rating: 4.9,
+    reviewCount: 12,
+    reviewImage: "/images/products/nova-cable-dot.webp",
+    modelNumber: "NCD-01",
+    origin: "중국",
+    packageItems: ["NOVA Cable Dot 본체", "재사용 접착 패드", "퀵 가이드"],
+    tagline: "케이블의 자리를 가장 작고 단정하게.",
+    description: "책상 위를 떠도는 USB-C 케이블을 한 번에 고정하는 초소형 실리콘 클립입니다. 부드러운 소재와 재사용 접착 패드로 셋업을 손상 없이 정돈합니다.",
+    options: ["Single"],
+    highlights: [
+      { title: "One-touch Hold", description: "케이블을 가볍게 눌러 넣으면 단단히 잡고, 필요할 때는 한 손으로 바로 꺼낼 수 있습니다." },
+      { title: "Soft Silicone", description: "유연한 무광 실리콘이 USB-C 케이블 표면에 스크래치를 남기지 않습니다." },
+      { title: "Reusable Base", description: "먼지를 물로 씻어 말리면 접착력을 되살려 원하는 위치에 다시 배치할 수 있습니다." },
+    ],
+    specs: [
+      { label: "호환 케이블", value: "직경 3.0–4.5mm" },
+      { label: "소재", value: "무광 실리콘 · 재사용 점착 패드" },
+      { label: "크기", value: "30 × 30 × 12mm" },
+      { label: "무게", value: "8g" },
+      { label: "보증", value: "초기 불량 교환" },
+    ],
+    reviews: [
+      { id: "c1", author: "이현*", date: "2026.08.11", rating: 5, title: "천 원으로 책상이 훨씬 깔끔해졌어요", comment: "충전 케이블이 매번 책상 아래로 떨어졌는데 Cable Dot에 꽂아두니 바로 집을 수 있어 편합니다. 크기도 작아서 눈에 잘 띄지 않아요.", option: "Graphite · Single", helpful: 9, photo: true },
+      { id: "c2", author: "박서*", date: "2026.08.09", rating: 5, title: "작지만 고정력이 충분합니다", comment: "노트북 USB-C 케이블을 잡아두기에 딱 맞습니다. 접착 패드도 흔들리지 않고 실리콘 마감이 부드러워요.", option: "Graphite · Single", helpful: 6 },
+      { id: "c3", author: "김지*", date: "2026.08.08", rating: 4, title: "결제 테스트용으로도 부담 없어요", comment: "가격이 가벼워서 새 결제 기능을 확인하면서 주문해봤습니다. 실제로도 유용한 데스크 액세서리라 만족합니다.", option: "Soft White · Single", helpful: 4 },
     ],
   },
   {

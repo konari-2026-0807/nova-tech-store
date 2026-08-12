@@ -30,6 +30,7 @@ yarn-error.log*
 .pnpm-debug.log*
 .vinext-dev.*.log
 .vinext-recovered.*.log
+.vinext-pages.*.log
 
 # env files (can opt-in for committing if needed)
 .env*
@@ -38,6 +39,7 @@ yarn-error.log*
 .vercel
 
 /dist/
+/pages-dist/
 /.wrangler/
 /outputs/
 /work/

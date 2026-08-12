@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { ArrowLeft, ArrowRight, Box, RefreshCcw, ShieldCheck, Star } from "lucide-react";
 import { CatalogHeader } from "../../components/CatalogHeader";
 import { ProductActions } from "../../components/ProductActions";
@@ -25,7 +26,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
   return (
     <main className="product-page">
       <CatalogHeader />
-      <div className="detail-breadcrumb"><a href="/"><ArrowLeft size={14} /> 홈</a><span>/</span><a href={`/category/${product.categorySlugs[1] ?? "new"}`}>{product.category}</a><span>/</span><strong>{product.name}</strong></div>
+      <div className="detail-breadcrumb"><Link href="/"><ArrowLeft size={14} /> 홈</Link><span>/</span><a href={`/category/${product.categorySlugs[1] ?? "new"}`}>{product.category}</a><span>/</span><strong>{product.name}</strong></div>
       <section className="product-detail-hero">
         <div className="detail-gallery"><div className="detail-image-stage"><span className="detail-image-badge">{product.badge || "NOVA SELECT"}</span><img src={product.image} alt={`${product.name} ${product.color} 제품 이미지`} /></div><div className="detail-image-meta"><span>01 / 01</span><p>실제 제품의 색상은 화면 설정에 따라 다르게 보일 수 있습니다.</p></div></div>
         <div className="detail-purchase">
@@ -34,9 +35,9 @@ export default async function ProductPage({ params }: ProductPageProps) {
           <p className="detail-tagline">{product.tagline}</p>
           <p className="detail-description">{product.description}</p>
           <a className="detail-rating-link" href="#reviews"><span><Star size={14} fill="currentColor" /> {product.rating.toFixed(1)}</span><em>{product.reviewCount.toLocaleString("ko-KR")}개의 구매자 후기</em><ArrowRight size={14} /></a>
-          <div className="detail-price"><strong>{product.price}</strong><span>또는 월 {(Math.ceil(product.priceNumber / 12 / 1000) * 1000).toLocaleString("ko-KR")}원부터 · 12개월</span></div>
+          <div className="detail-price"><strong>{product.price}</strong><span>{product.priceNumber >= 12000 ? `또는 월 ${(Math.ceil(product.priceNumber / 12 / 1000) * 1000).toLocaleString("ko-KR")}원부터 · 12개월` : "일시불 · 토스 테스트 결제 가능"}</span></div>
           <ProductActions product={product} />
-          <div className="detail-service-mini"><div><Box size={17} /><span><strong>무료 배송</strong>전국 무료 배송</span></div><div><RefreshCcw size={17} /><span><strong>간편 반품</strong>14일 이내 반품</span></div><div><ShieldCheck size={17} /><span><strong>품질 보증</strong>공식 정품 보증</span></div></div>
+          <div className="detail-service-mini"><div><Box size={17} /><span><strong>{product.priceNumber >= 50000 ? "무료 배송" : "배송비 3,000원"}</strong>{product.priceNumber >= 50000 ? "전국 무료 배송" : "5만원 이상 무료 배송"}</span></div><div><RefreshCcw size={17} /><span><strong>간편 반품</strong>14일 이내 반품</span></div><div><ShieldCheck size={17} /><span><strong>품질 보증</strong>공식 정품 보증</span></div></div>
         </div>
       </section>
 
@@ -56,7 +57,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
       <ProductReviews productName={product.name} rating={product.rating} reviewCount={product.reviewCount} reviewImage={product.reviewImage} reviews={product.reviews} />
 
       <section className="detail-related"><div className="section-heading"><div><p className="eyebrow dark">COMPLETE THE SETUP</p><h2>함께 보면 좋은 기술.</h2></div></div><div className="related-grid">{related.map((item) => <a href={`/products/${item.slug}`} key={item.slug}><div><img src={item.image} alt={`${item.name} 제품`} /></div><p>{item.category}</p><h3>{item.name}</h3><span>{item.price} <ArrowRight size={14} /></span></a>)}</div></section>
-      <footer className="catalog-footer"><a className="brand footer-brand" href="/" aria-label="NOVA 홈"><img className="brand-logo" src="/images/brand/nova-logo.png" alt="NOVA" /></a><p>기술을 고르는 가장 아름다운 방법.</p><span>© 2026 NOVA</span></footer>
+      <footer className="catalog-footer"><Link className="brand footer-brand" href="/" aria-label="NOVA 홈"><img className="brand-logo" src="/images/brand/nova-logo.png" alt="NOVA" /></Link><p>기술을 고르는 가장 아름다운 방법.</p><span>© 2026 NOVA</span></footer>
     </main>
   );
 }

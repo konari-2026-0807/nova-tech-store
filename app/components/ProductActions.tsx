@@ -27,7 +27,7 @@ export function ProductActions({ product }: { product: CatalogProduct }) {
         <div className="detail-quantity"><button type="button" aria-label="수량 줄이기" onClick={() => setQuantity(Math.max(1, quantity - 1))}><Minus size={15} /></button><span>{quantity}</span><button type="button" aria-label="수량 늘리기" onClick={() => setQuantity(quantity + 1)}><Plus size={15} /></button></div>
         <button type="button" className={added ? "detail-add-button added" : "detail-add-button"} onClick={handleAdd}>{added ? <><Check size={18} /> 담았습니다</> : <><ShoppingBag size={18} /> 장바구니에 담기</>}</button>
       </div>
-      <p className="detail-delivery">오늘 오후 2시 이전 주문 시 내일 도착 · 무료 배송</p>
+      <p className="detail-delivery">오늘 오후 2시 이전 주문 시 내일 도착 · {product.priceNumber >= 50000 ? "무료 배송" : "배송비 3,000원"}</p>
     </div>
   );
 }
